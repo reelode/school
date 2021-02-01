@@ -25,4 +25,14 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::get('profile/{user}', [ProfilesController::class, 'index'])->name('profile.index');
+// Route::get('profile/{user}', [ProfilesController::class, 'index'])->name('profile.index');
+Route::group(
+    ['middleware' => 'auth'],
+    function () {
+
+        Route::get(
+            'profile/{id}',
+            [ProfilesController::class, 'view']
+        )->name('profile.index');
+    }
+);
