@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ProfilesController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +19,10 @@ use Illuminate\Support\Facades\Route;
     return view('welcome');
 }); */
 
+//Auth::routes();
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/', function () {
     return view('dashboard');
 })->name('dashboard');
+
+Route::get('profile/{user}', [ProfilesController::class, 'index'])->name('profile.index');
